@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Update Book</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control" value="{{ book.title }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" name="author" id="author" class="form-control" value="{{ book.author }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control" rows="3">{{ book.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="file" class="form-label">Replace File</label>
+        <input type="file" name="file" id="file" class="form-control">
+        <p>Current File: {{ book.file.name }}</p>
+    </div>
+    <button type="submit" class="btn btn-success">Update Book</button>
+    <a href="{% url 'list_books' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
